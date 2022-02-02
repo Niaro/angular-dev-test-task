@@ -21,6 +21,22 @@ https://openweathermap.org/api/geocoding-api
 -   Tests are not necessary.
 -   Please use repositories formatting.
 
+Hourly Cities Mode
+
+| City Name | 03:00 | 06:00 | 09:00 | 12:00 |  15:00 | 18:00 | 21:00 | 24:00 |
+|-----------|-------|-------|-------|-------|--------|-------|-------|-------|
+| New York  |  15°  |  15°  |  15°  |  15°  |   15°  |  15°  |  15°  |  15°  |
+| London    |  15°  |  15°  |  15°  |  15°  |   15°  |  15°  |  15°  |  15°  |
+| Limassol  |  15°  |  15°  |  15°  |  15°  |   15°  |  15°  |  15°  |  15°  |
+
+Daily Cities Mode
+
+| City Name |  Mo  |  Tu  |  We  |  Th  |   Fr  |  Sa  |  Su  |
+|-----------|------|------|------|------|-------|------|------|
+| New York  |  15° |  15° |  15° |  15° |   15° |  15° |  15° |
+| London    |  15° |  15° |  15° |  15° |   15° |  15° |  15° |
+| Limassol  |  15° |  15° |  15° |  15° |   15° |  15° |  15° |
+
 # This project was generated using [Nx](https://nx.dev).
 
 <p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
