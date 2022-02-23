@@ -2,9 +2,9 @@
 <div class="c-formContainer">
 	<form class="c-form" action="">
 		<input class="c-form__input" placeholder="Type your city" required [formControl]="inputFormControl">
-		<label class="c-form__buttonLabel" for="checkbox">
-			<button class="c-form__button" type="button">Add</button>
+		<label class="c-form__buttonLabel">
+			<button class="c-form__button" type="button" (click)="added()">Add</button>
 		</label>
-		<label class="c-form__toggle" for="checkbox" data-title="Find a city"></label>
+		<label class="c-form__toggle -{{(findCity$ | async) ? 'success' : 'not-found'}}" for="checkbox" data-title="Find a city"></label>
 	</form>
 </div>
