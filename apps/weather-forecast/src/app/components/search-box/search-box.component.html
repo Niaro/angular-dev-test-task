@@ -1,0 +1,10 @@
+<input class="c-checkbox" type="checkbox" id="checkbox" [formControl]="checkedFormControl">
+<div class="c-formContainer">
+	<form class="c-form" action="">
+		<input class="c-form__input" placeholder="Type your city" required [formControl]="inputFormControl">
+		<label class="c-form__buttonLabel" for="checkbox">
+			<button class="c-form__button" type="button">Add</button>
+		</label>
+		<label class="c-form__toggle" for="checkbox" data-title="Find a city"></label>
+	</form>
+</div>
