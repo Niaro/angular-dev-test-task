@@ -1,17 +1,11 @@
 @import '../../../vars';
 
-$black: #000000;
-$cornflower-lilac: #ffaea9;
-$salmon: #ff7b73;
-$white: #ffffff;
-$your-pink: #ffcccc;
-
 .c-checkbox {
 	display: none;
 
 	&:checked + .c-formContainer {
 		.c-form {
-			width: 20em;
+			width: 100%;
 		}
 
 		.c-form__toggle {
@@ -47,7 +41,7 @@ $your-pink: #ffcccc;
 .c-formContainer,
 .c-form,
 .c-form__toggle {
-	width: 20em;
+	width: 100%;
 	height: 3.25em;
 }
 
@@ -60,24 +54,19 @@ $your-pink: #ffcccc;
 .c-form__toggle {
 	position: absolute;
 	border-radius: 6.25em;
-	background-color: $white;
+	background-color: $background-secondary;
 	transition: 0.2s;
 }
 
 .c-form {
 	left: 50%;
 	transform: translateX(-50%);
-	padding: 0.625em;
-	box-sizing: border-box;
-	box-shadow: 0 0.125em 0.3125em rgba($black, 0.3);
-
-	// position form inputs
 	display: flex;
 	justify-content: center;
 }
 
 .c-form__toggle {
-	color: $salmon;
+	color: $text-accent;
 	top: 0;
 	cursor: pointer;
 	z-index: 1;
@@ -99,7 +88,6 @@ $your-pink: #ffcccc;
 	border: 0;
 	outline: 0;
 	border-radius: 5em;
-	box-sizing: border-box;
 }
 
 .c-form__input,
@@ -112,20 +100,21 @@ $your-pink: #ffcccc;
 }
 
 .c-form__input {
-	color: $your-pink;
+	color: $text-color;
+	background-color: $background-secondary;
 	height: 100%;
 	width: 100%;
-	padding: 0 0.3em;
+	padding: 0 0 0 .4em;
 
 	&::placeholder {
 		color: currentColor;
 	}
 
 	&:required:valid {
-		color: $salmon;
+		color: $text-accent;
 
 		+ .c-form__buttonLabel {
-			color: $white;
+			display: block;
 
 			&::before {
 				pointer-events: initial;
@@ -135,7 +124,8 @@ $your-pink: #ffcccc;
 }
 
 .c-form__buttonLabel {
-	color: $cornflower-lilac;
+	display: none;
+	color: $background-primary;
 	height: 100%;
 	width: auto;
 
@@ -155,5 +145,5 @@ $your-pink: #ffcccc;
 	padding: 0;
 	height: 100%;
 	width: 3em;
-	background-color: $salmon;
+	background-color: $text-accent;
 }
