@@ -3,6 +3,7 @@
 		<app-input placeholder="Type your city" [formControl]="searchControl"></app-input>
 		<app-button (click)="addCity()">Add</app-button>
 	</div>
+	<div *ngIf="errorMessage$ | async as errorMessage" class="error-message"> {{errorMessage}} </div>
 	<app-toggle-button class="header-toggle" [formControl]="hourlyControl">
 		<ng-container leftLabel>Hourly</ng-container>
 		<ng-container rightLabel>Daily</ng-container>
