@@ -1,4 +1,4 @@
-<div class="switch-button">
-	<input class="switch-button-checkbox" type="checkbox" [formControl]="checkedControl">
-	<label class="switch-button-label"><span class="switch-button-label-span">Hourly</span></label>
-</div>
+<input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" (change)="click(true)" [checked]="val">
+<label for="toggle-on" class="btn"><ng-content select="[leftLabel]"></ng-content></label>
+<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio" (change)="click(false)" [checked]="!val">
+<label for="toggle-off" class="btn"><ng-content select="[rightLabel]"></ng-content></label>
