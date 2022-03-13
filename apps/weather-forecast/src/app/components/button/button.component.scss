@@ -1,0 +1,13 @@
+@import '../../../vars';
+
+.c-form__button {
+	color: $background-primary;
+	padding: 10px 15px;
+	height: 100%;
+	width: 100%;
+	background-color: $text-accent;
+	cursor: pointer;
+	border: none;
+	border-radius: 5em;
+	font-size: 1.75em;
+}
