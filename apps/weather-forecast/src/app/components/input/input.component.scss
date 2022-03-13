@@ -1,0 +1,38 @@
+@import '../../../vars';
+
+.c-formContainer,
+.c-form {
+	width: 100%;
+	min-width: 224px;
+	height: 3.25em;
+}
+
+.c-formContainer {
+	position: relative;
+	font-weight: 700;
+}
+
+.c-form {
+	position: absolute;
+	border-radius: 6.25em;
+	background-color: $background-secondary;
+	display: flex;
+	justify-content: center;
+}
+
+.c-form__input {
+	font: inherit;
+	border: 0;
+	outline: 0;
+	border-radius: 5em;
+	font-size: 1.75em;
+	color: $text-accent;
+	background-color: $background-secondary;
+	height: 100%;
+	width: 100%;
+	padding: 0 0 0 .4em;
+
+	&::placeholder {
+		color: currentColor;
+	}
+}
