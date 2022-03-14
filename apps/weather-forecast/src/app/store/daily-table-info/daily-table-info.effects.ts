@@ -5,6 +5,7 @@ import { catchError, EMPTY, exhaustMap, map } from 'rxjs';
 import { City } from 'libs/weather-forecast/services/src/lib/weather-forecast-api.interface';
 import { WeatherForecastApiService } from '@bp/weather-forecast/services';
 import { addRowToDailyInfo } from 'apps/weather-forecast/src/app/store/daily-table-info/daily-table-info.actions';
+import { convertKelvinToCelsius } from 'apps/weather-forecast/src/app/core/utilities/convert-kelvin-to-celsius.utility';
 
 @Injectable()
 export class DailyTableInfoEffects {
@@ -13,7 +14,12 @@ export class DailyTableInfoEffects {
 			ofType(LOAD_CITY_SUCCESS_ACTION),
 			exhaustMap((city: City) =>
 				this.weatherForecastApiService.getDailyInfo(city.lat, city.lon).pipe(
-					map(dailyInfo => addRowToDailyInfo(dailyInfo)),
+					map(dailyInfo =>
+						addRowToDailyInfo({
+							name: city.name,
+							temps: dailyInfo.daily.map(day => Math.round(convertKelvinToCelsius(day.temp.day))),
+						})
+					),
 					catchError(() => EMPTY)
 				)
 			)

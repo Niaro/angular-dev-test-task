@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
 
 	errorMessage$ = new Subject<string | undefined>();
 
+	dailyTableRows$ = this.store.select('dailyTableRows');
+
 	constructor(private readonly store: Store<RootInterface>, private readonly activatedRoute: ActivatedRoute) {}
 
 	ngOnInit(): void {

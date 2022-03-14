@@ -1,16 +1,16 @@
-import { DailyInfo } from 'libs/weather-forecast/services/src/lib/weather-forecast-api.interface';
 import { Action, createReducer, on } from '@ngrx/store';
 import { addRowToDailyInfo } from 'apps/weather-forecast/src/app/store/daily-table-info/daily-table-info.actions';
+import { DailyTableRow } from 'apps/weather-forecast/src/app/core/daily-table-row.interface';
 
-export const initialState: DailyInfo[] = [];
+export const initialState: DailyTableRow[] = [];
 
-export const _dailyTableInfoReducer = createReducer(
+const _dailyTableInfoReducer = createReducer(
 	initialState,
-	on(addRowToDailyInfo, (state: DailyInfo[], addedDailyInfo: DailyInfo) => {
+	on(addRowToDailyInfo, (state: DailyTableRow[], addedDailyInfo: DailyTableRow) => {
 		return [...state, addedDailyInfo];
 	})
 );
 
-export function dailyTableInfoReducer(state: DailyInfo[] | undefined, action: Action): DailyInfo[] {
+export function dailyTableInfoReducer(state: DailyTableRow[] | undefined, action: Action): DailyTableRow[] {
 	return _dailyTableInfoReducer(state, action);
 }

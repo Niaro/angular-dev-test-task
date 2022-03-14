@@ -7,7 +7,7 @@ import { dailyTableInfoReducer } from 'apps/weather-forecast/src/app/store/daily
 export const rootReducer = {
 	cities: citiesReducer,
 	hourlyTableInfo: hourlyTableInfoReducer,
-	dailyTableInfo: dailyTableInfoReducer,
+	dailyTableRows: dailyTableInfoReducer,
 	searchQueryParam: searchQueryParamReducer,
 	modeQueryParams: modeQueryParamReducer,
 };
