@@ -16,13 +16,13 @@ export class WeatherForecastApiService {
 
 	getHourlyInfo(lat: number, lon: number): Observable<HourlyInfo> {
 		return this.http.get<HourlyInfo>(
-			`${this._url}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,daily,alerts&appid=${this._apiKey}`
+			`${this._url}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,daily,alerts&units=metric&appid=${this._apiKey}`
 		);
 	}
 
 	getDailyInfo(lat: number, lon: number): Observable<DailyInfo> {
 		return this.http.get<DailyInfo>(
-			`${this._url}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&appid=${this._apiKey}`
+			`${this._url}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&units=metric&appid=${this._apiKey}`
 		);
 	}
 }
