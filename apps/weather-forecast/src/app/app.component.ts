@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 	ngOnInit(): void {
 		this.activatedRoute.queryParams
 			.pipe(
-				filter(({ searchQuery, mode }: Params) => searchQuery !== undefined && mode !== undefined),
+				filter(({ searchQuery, mode }: Params) => searchQuery !== undefined || mode !== undefined),
 				first()
 			)
 			.subscribe((queryParams: Params) => {
