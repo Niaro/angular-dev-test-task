@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, Provider } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const VALUE_ACCESSOR_PROVIDER: Provider = {
@@ -18,7 +18,9 @@ export class ToggleButtonComponent implements ControlValueAccessor {
 	@Input() leftLabel = '';
 	@Input() rightLabel = '';
 
-	val = true;
+	val = false;
+
+	constructor(private cdr: ChangeDetectorRef) {}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onChange: (val: boolean) => void = () => {};
@@ -26,8 +28,10 @@ export class ToggleButtonComponent implements ControlValueAccessor {
 	onTouch: () => void = () => {};
 
 	set value(val: boolean) {
+		this.val = val;
 		this.onChange(val);
 		this.onTouch();
+		this.cdr.markForCheck();
 	}
 
 	writeValue(value: boolean): void {
@@ -43,6 +47,7 @@ export class ToggleButtonComponent implements ControlValueAccessor {
 	}
 
 	click(value: boolean): void {
-		this.value = value;
+		this.onChange(value);
+		this.onTouch();
 	}
 }

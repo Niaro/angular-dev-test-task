@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output, Provider } from '@angular/core';
-import { City } from 'libs/weather-forecast/services/src/lib/weather-forecast-api.interface';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input, Provider } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const VALUE_ACCESSOR_PROVIDER: Provider = {
@@ -17,19 +16,25 @@ const VALUE_ACCESSOR_PROVIDER: Provider = {
 })
 export class InputComponent implements ControlValueAccessor {
 	@Input() placeholder = '';
-	@Output() addCity = new EventEmitter<City>();
 
 	val = '';
+
+	constructor(private cdr: ChangeDetectorRef) {}
 
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onChange: (val: string) => void = () => {};
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	onTouch: () => void = () => {};
 
+	get value(): string {
+		return this.val;
+	}
+
 	set value(val: string) {
 		this.val = val;
 		this.onChange(val);
 		this.onTouch();
+		this.cdr.markForCheck();
 	}
 
 	writeValue(value: string) {
