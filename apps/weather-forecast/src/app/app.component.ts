@@ -2,11 +2,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { RootInterface } from 'apps/weather-forecast/src/app/store/root/root.interface';
-import { combineLatest, filter, first, map, Observable, Subject, switchMap } from 'rxjs';
+import { combineLatest, filter, first, map, Observable, switchMap } from 'rxjs';
 import { changeSearchQueryParam } from 'apps/weather-forecast/src/app/store/search-query-param/search-query-param.actions';
 import { changeModeQueryParam } from 'apps/weather-forecast/src/app/store/mode/mode-query-param.actions';
 import { ActivatedRoute, Params } from '@angular/router';
 import { loadCity } from 'apps/weather-forecast/src/app/store/cities/cities.actions';
+import { hideErrorMessage } from 'apps/weather-forecast/src/app/store/error-message/error-message.action';
 
 @Component({
 	selector: 'bp-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
 	searchControl = new FormControl('');
 	hourlyControl = new FormControl(false);
 
-	errorMessage$ = new Subject<string | undefined>();
+	errorMessage$ = this.store.select('errorMessage');
 
 	rows$: Observable<{ headerRow: string[]; rows: string[][] }> = this.store.select('modeQueryParams').pipe(
 		switchMap(({ param: mode }) => {
@@ -54,6 +55,7 @@ export class AppComponent implements OnInit {
 	}
 
 	addCity(): void {
+		this.store.dispatch(hideErrorMessage());
 		this.store.dispatch(loadCity({ searchQuery: this.searchControl.value }));
 	}
 }

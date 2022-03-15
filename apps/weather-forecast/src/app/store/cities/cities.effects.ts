@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, filter, map, of, tap } from 'rxjs';
+import { catchError, exhaustMap, map, of } from 'rxjs';
 import { WeatherForecastApiService } from '@bp/weather-forecast/services';
 import { City } from 'libs/weather-forecast/services/src/lib/weather-forecast-api.interface';
-import {
-	LOAD_CITY_ACTION,
-	loadCityError,
-	loadCitySuccess,
-} from 'apps/weather-forecast/src/app/store/cities/cities.actions';
+import { LOAD_CITY_ACTION, loadCitySuccess } from 'apps/weather-forecast/src/app/store/cities/cities.actions';
+import { displayErrorMessage } from 'apps/weather-forecast/src/app/store/error-message/error-message.action';
 
 @Injectable()
 export class CitiesEffects {
@@ -16,10 +13,10 @@ export class CitiesEffects {
 			ofType(LOAD_CITY_ACTION),
 			exhaustMap(({ searchQuery }) =>
 				this.weatherForecastApiService.getCity(searchQuery).pipe(
-					tap((c: City[]) => !c.length && loadCityError({ errorMessage: 'City not found' })),
-					filter((c: City[]) => !!c.length),
-					map((city: City[]) => loadCitySuccess(city[0])),
-					catchError(() => of(loadCityError({ errorMessage: 'ServerError' })))
+					map((city: City[]) =>
+						city.length ? loadCitySuccess(city[0]) : displayErrorMessage({ text: 'City not found' })
+					),
+					catchError(() => of(displayErrorMessage({ text: 'ServerError' })))
 				)
 			)
 		);

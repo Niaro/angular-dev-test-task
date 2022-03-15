@@ -10,4 +10,5 @@ export interface RootInterface {
 	dailyRows: string[][];
 	hourlyHeaderRow: string[];
 	hourlyRows: string[][];
+	errorMessage: string;
 }
