@@ -6,6 +6,7 @@ let hour = new Date(Date.now()).getHours();
 for (let i = 0; i < 8; i++) {
 	hours.push(`${hour}:00`);
 	hour = hour + 3;
+	hour = hour > 24 ? hour - 24 : hour;
 }
 
 export const initialState: string[] = ['City Name', ...hours];
