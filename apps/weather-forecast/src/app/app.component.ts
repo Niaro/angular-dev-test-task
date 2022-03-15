@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
 	errorMessage$ = new Subject<string | undefined>();
 
 	rows$: Observable<{ headerRow: string[]; rows: string[][] }> = this.store.select('modeQueryParams').pipe(
-		switchMap(mode => {
-			return mode
+		switchMap(({ param: mode }) => {
+			return mode === 'hourly'
 				? combineLatest([this.store.select('hourlyHeaderRow'), this.store.select('hourlyRows')])
 				: combineLatest([this.store.select('dailyHeaderRow'), this.store.select('dailyRows')]);
 		}),
