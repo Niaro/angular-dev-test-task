@@ -11,7 +11,6 @@ import { StoreModule } from '@ngrx/store';
 import { rootReducer } from 'apps/weather-forecast/src/app/store/root/root.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { rootEffects } from 'apps/weather-forecast/src/app/store/root/root.effects';
 import { TableComponent } from 'apps/weather-forecast/src/app/components/table/table.component';
 
