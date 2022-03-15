@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { RootInterface } from 'apps/weather-forecast/src/app/store/root/root.interface';
-import { combineLatest, filter, first, map, Observable, switchMap } from 'rxjs';
+import { combineLatest, filter, first, map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { changeSearchQueryParam } from 'apps/weather-forecast/src/app/store/search-query-param/search-query-param.actions';
 import { changeModeQueryParam } from 'apps/weather-forecast/src/app/store/mode/mode-query-param.actions';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -15,9 +15,9 @@ import { hideErrorMessage } from 'apps/weather-forecast/src/app/store/error-mess
 	styleUrls: ['./app.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 	searchControl = new FormControl('');
-	hourlyControl = new FormControl(false);
+	hourlyControl = new FormControl(true);
 
 	errorMessage$ = this.store.select('errorMessage');
 
@@ -29,6 +29,8 @@ export class AppComponent implements OnInit {
 		}),
 		map(([headerRow, rows]) => ({ headerRow, rows }))
 	);
+
+	destroyer$ = new Subject<void>();
 
 	constructor(private readonly store: Store<RootInterface>, private readonly activatedRoute: ActivatedRoute) {}
 
@@ -48,10 +50,19 @@ export class AppComponent implements OnInit {
 				this.hourlyControl.setValue(modeQueryParam === 'hourly');
 			});
 
-		this.searchControl.valueChanges.subscribe(param => this.store.dispatch(changeSearchQueryParam({ param })));
-		this.hourlyControl.valueChanges.subscribe(value =>
-			this.store.dispatch(changeModeQueryParam({ param: value === true ? 'hourly' : 'daily' }))
-		);
+		this.searchControl.valueChanges
+			.pipe(takeUntil(this.destroyer$))
+			.subscribe(param => this.store.dispatch(changeSearchQueryParam({ param })));
+		this.hourlyControl.valueChanges
+			.pipe(takeUntil(this.destroyer$))
+			.subscribe(value =>
+				this.store.dispatch(changeModeQueryParam({ param: value === true ? 'hourly' : 'daily' }))
+			);
+	}
+
+	ngOnDestroy(): void {
+		this.destroyer$.next();
+		this.destroyer$.complete();
 	}
 
 	addCity(): void {

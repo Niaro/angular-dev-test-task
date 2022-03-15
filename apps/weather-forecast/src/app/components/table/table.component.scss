@@ -12,6 +12,8 @@
 
 	th:first-child,td:first-child {
 		width: 100px;
+		white-space: nowrap;
+		text-align: left;
 	}
 }
 

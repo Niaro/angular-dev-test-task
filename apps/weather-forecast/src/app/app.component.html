@@ -10,6 +10,8 @@
 	</app-toggle-button>
 </div>
 
-<div class="table">
-	<app-table *ngIf="rows$ | async as rows" [headerRow]="rows.headerRow" [rows]="rows.rows"></app-table>
+<div class="table-container">
+	<div class="table">
+		<app-table *ngIf="rows$ | async as rows" [headerRow]="rows.headerRow" [rows]="rows.rows"></app-table>
+	</div>
 </div>

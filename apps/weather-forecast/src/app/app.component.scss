@@ -23,9 +23,15 @@
 	color: $text-error;
 }
 
+.table-container {
+	overflow-x: auto;
+}
+
 .table {
 	display: flex;
 	justify-content: center;
+
+	@media (max-width: 480px) {
+		display: block;
+	}
 }
-
-
