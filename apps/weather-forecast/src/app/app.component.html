@@ -8,16 +8,8 @@
 		<ng-container leftLabel>Hourly</ng-container>
 		<ng-container rightLabel>Daily</ng-container>
 	</app-toggle-button>
+</div>
 
-	<div class="table">
-		<ng-container *ngIf="hourlyControl.value; else dailyTable">
-<!--			<app-hourly-table *ngIf=""></app-hourly-table>-->
-		</ng-container>
-
-		<ng-template #dailyTable>
-			<app-daily-table *ngIf="dailyTableRows$ | async as dailyTableRows; else tableIsEmpty" [tableRows]="dailyTableRows"></app-daily-table>
-		</ng-template>
-
-		<ng-template #tableIsEmpty>Table is empty</ng-template>
-	</div>
+<div class="table">
+	<app-table *ngIf="rows$ | async as rows" [headerRow]="rows.headerRow" [rows]="rows.rows"></app-table>
 </div>

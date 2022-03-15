@@ -1,13 +1,17 @@
 import { citiesReducer } from 'apps/weather-forecast/src/app/store/cities/cities.reducer';
-import { hourlyTableInfoReducer } from 'apps/weather-forecast/src/app/store/hourly-table-info/hourly-table-info.reducer';
+import { hourlyRowsReducer } from 'apps/weather-forecast/src/app/store/hourly-table-info/hourly-rows.reducer';
 import { searchQueryParamReducer } from 'apps/weather-forecast/src/app/store/search-query-param/search-query-param.reducer';
 import { modeQueryParamReducer } from 'apps/weather-forecast/src/app/store/mode/mode-query-param.reducer';
-import { dailyTableInfoReducer } from 'apps/weather-forecast/src/app/store/daily-table-info/daily-table-info.reducer';
+import { dailyRowsReducer } from 'apps/weather-forecast/src/app/store/daily-rows/daily-rows.reducer';
+import { hourlyHeaderRowReducer } from 'apps/weather-forecast/src/app/store/hourly-header-row/hourly-header-row.reducer';
+import { dailyHeaderRowReducer } from 'apps/weather-forecast/src/app/store/daily-header-row/daily-header-row.reducer';
 
 export const rootReducer = {
 	cities: citiesReducer,
-	hourlyTableInfo: hourlyTableInfoReducer,
-	dailyTableRows: dailyTableInfoReducer,
 	searchQueryParam: searchQueryParamReducer,
 	modeQueryParams: modeQueryParamReducer,
+	dailyHeaderRow: dailyHeaderRowReducer,
+	dailyRows: dailyRowsReducer,
+	hourlyHeaderRow: hourlyHeaderRowReducer,
+	hourlyRows: hourlyRowsReducer,
 };

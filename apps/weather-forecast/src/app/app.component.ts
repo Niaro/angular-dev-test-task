@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { RootInterface } from 'apps/weather-forecast/src/app/store/root/root.interface';
-import { filter, first, Subject } from 'rxjs';
+import { combineLatest, filter, first, map, Observable, Subject, switchMap } from 'rxjs';
 import { changeSearchQueryParam } from 'apps/weather-forecast/src/app/store/search-query-param/search-query-param.actions';
 import { changeModeQueryParam } from 'apps/weather-forecast/src/app/store/mode/mode-query-param.actions';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -20,7 +20,14 @@ export class AppComponent implements OnInit {
 
 	errorMessage$ = new Subject<string | undefined>();
 
-	dailyTableRows$ = this.store.select('dailyTableRows');
+	rows$: Observable<{ headerRow: string[]; rows: string[][] }> = this.store.select('modeQueryParams').pipe(
+		switchMap(mode => {
+			return mode
+				? combineLatest([this.store.select('hourlyHeaderRow'), this.store.select('hourlyRows')])
+				: combineLatest([this.store.select('dailyHeaderRow'), this.store.select('dailyRows')]);
+		}),
+		map(([headerRow, rows]) => ({ headerRow, rows }))
+	);
 
 	constructor(private readonly store: Store<RootInterface>, private readonly activatedRoute: ActivatedRoute) {}
 
