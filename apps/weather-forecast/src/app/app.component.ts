@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { RootInterface } from 'apps/weather-forecast/src/app/store/root/root.interface';
-import { combineLatest, filter, first, map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import { combineLatest, debounceTime, filter, first, map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { changeSearchQueryParam } from 'apps/weather-forecast/src/app/store/search-query-param/search-query-param.actions';
 import { changeModeQueryParam } from 'apps/weather-forecast/src/app/store/mode/mode-query-param.actions';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
 			});
 
 		this.searchControl.valueChanges
-			.pipe(takeUntil(this.destroyer$))
+			.pipe(debounceTime(1000), takeUntil(this.destroyer$))
 			.subscribe(param => this.store.dispatch(changeSearchQueryParam({ param })));
 		this.hourlyControl.valueChanges
 			.pipe(takeUntil(this.destroyer$))
