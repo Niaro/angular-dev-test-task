@@ -3,7 +3,7 @@
 Please, put the solution on GitHub and send the link back via email.
 Enjoy!
 
-# The day to day task: weather forecast
+# Weather forecast
 
 Using the free open weather map two API endpoints (the key is on the weather service)
 https://openweathermap.org/api/one-call-api
@@ -16,10 +16,13 @@ https://openweathermap.org/api/geocoding-api
 -   The city table has a column`City Name`, and the rest are temperature columns. In the case of hourly mode, 8 columns with 3-hour step and in the case of daily mode 7 days.
 -   Switching between hourly and daily modes should bring back the previous state of the table before switching.
 -   The URL should be updated according to the search query and mode. That is two parameters on the URL.
--   Build the application using NgRx.
 -   SOLID, DRY, shouldn't be just abbreviations for you. It should be designed to be maintainable to an extent.
 -   Tests are not necessary.
 -   Please use repositories formatting.
+
+## Bonus points 
+-   Build the application using any state management lib you are familiar with.
+-   Use NGRX as the state management lib
 
 Hourly Cities Mode
 
