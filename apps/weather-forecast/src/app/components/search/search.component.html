@@ -1,0 +1,4 @@
+<form [formGroup]="form" (submit)="onSearch()" class="search">
+	<input type="text" formControlName="search" class="search__input" />
+	<button type="button" (click)="onSearch()" class="search__button" [disabled]="form.invalid">Search</button>
+</form>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+
 import { WeatherForecastApiService } from '@bp/weather-forecast/services';
 
 @Component({
@@ -6,19 +7,19 @@ import { WeatherForecastApiService } from '@bp/weather-forecast/services';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 	title = 'weather-forecast';
 	readonly errors$ = this.weatherForecastApi.errors$;
 
 	constructor(private readonly weatherForecastApi: WeatherForecastApiService) {}
 
-	ngOnInit(): void {
-		this.weatherForecastApi.getWeather('Newrr', 'daily').subscribe(resolve => {
-			console.log(resolve);
-		});
-	}
-
 	onErrorClose() {
 		this.weatherForecastApi.onClearError();
+	}
+
+	onSearch(city: string) {
+		this.weatherForecastApi.getWeather(city, 'daily').subscribe(resolve => {
+			console.log(resolve);
+		});
 	}
 }
