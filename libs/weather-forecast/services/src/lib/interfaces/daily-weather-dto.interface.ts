@@ -1,14 +1,5 @@
-export interface DailyWeatherDto {
-	daily: DailyWeatherEl[];
-}
+import { WeatherEl } from './weather-el.interface';
 
-export interface DailyWeatherEl {
-	temp: {
-		day: number;
-		eve: number;
-		max: number;
-		min: number;
-		morn: number;
-		night: number;
-	};
+export interface DailyWeatherDto {
+	daily: WeatherEl[];
 }
